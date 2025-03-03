@@ -1,0 +1,212 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+
+    // Dummy data for prototyping
+    var completedAssessments = 3;
+    var careerMatchesCount = 5;
+    var savedCareers = 7;
+    var upcomingSessions = new List<dynamic>();
+
+    var recentTests = new List<dynamic> {
+        new { TestName = "Technical Skills Assessment", CompletionDate = DateTime.Now.AddDays(-2), Score = 82 },
+        new { TestName = "Personality Test", CompletionDate = DateTime.Now.AddDays(-5), Score = 65 },
+        new { TestName = "Career Interest Inventory", CompletionDate = DateTime.Now.AddDays(-7), Score = 91 }
+    };
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    <a href="#" class="d-none d-sm-inline-block btn btn-primary shadow-sm">
+        <i class="fas fa-clipboard-list fa-sm text-white-50 me-1"></i> Take New Assessment
+    </a>
+</div>
+
+<div class="row">
+    <!-- Stats Cards -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-0 shadow h-100 py-2 stat-card primary">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Tests Completed</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@completedAssessments</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clipboard-check fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-0 shadow h-100 py-2 stat-card success">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Career Matches</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@careerMatchesCount</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-briefcase fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-0 shadow h-100 py-2 stat-card info">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Saved Careers</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@savedCareers</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-bookmark fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-0 shadow h-100 py-2 stat-card warning">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Upcoming Sessions</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@upcomingSessions.Count</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar-alt fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <!-- Career Matches Chart -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-chart-bar me-1"></i> Career Matches
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="careerMatchChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Tests -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-clipboard-list me-1"></i> Recent Tests
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Test Name</th>
+                                <th>Date Completed</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var test in recentTests)
+                            {
+                                <tr>
+                                    <td>@test.TestName</td>
+                                    <td>@test.CompletionDate.ToString("d MMM yyyy")</td>
+                                    <td>
+                                        <div class="progress progress-sm">
+                                            <div class="progress-bar @GetProgressBarColor(test.Score)"
+                                                 role="progressbar"
+                                                 style="width: @test.Score%">
+                                                @test.Score%
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <!-- Quick Actions -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-bolt me-1"></i> Quick Actions
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-search me-2"></i> Career Finder
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-book me-2"></i> Resource Library
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-user-edit me-2"></i> Edit Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Dummy data for chart
+        const ctx = document.getElementById('careerMatchChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Software Developer', 'Data Scientist', 'UX Designer', 'Project Manager', 'Digital Marketer'],
+                datasets: [{
+                    label: 'Match Score',
+                    data: [85, 78, 65, 60, 55],
+                    backgroundColor: '#4e73df'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}
+
+@functions {
+    string GetProgressBarColor(int score)
+    {
+        return score >= 80 ? "bg-success" :
+               score >= 60 ? "bg-warning" : "bg-danger";
+    }
+}

@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "_AuthLayout";
+    ViewData["Title"] = "Login - PathWay";
+}
+
+<div class="auth-header">
+    <div class="brand-logo">
+        <i class="fas fa-road"></i>
+    </div>
+    <h3 class="mb-1">Welcome Back</h3>
+    <p class="mb-0">Sign in to continue your career journey</p>
+</div>
+
+<div class="auth-body">
+    <form method="POST" asp-action="LoginUser" asp-controller="Auth">
+        <div class="mb-4">
+            <label for="Name" class="form-label">Username</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                <input type="text" class="form-control" id="Name" name="Name" placeholder="Enter your username" required>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <div class="d-flex justify-content-between">
+                <label for="Password" class="form-label">Password</label>
+                <a href="#" class="text-decoration-none small">Forgot password?</a>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                <input type="password" class="form-control" id="Password" name="Password" placeholder="Enter your password" required>
+            </div>
+        </div>
+
+        <div class="mb-4 form-check">
+            <input type="checkbox" class="form-check-input" id="rememberMe">
+            <label class="form-check-label" for="rememberMe">Remember me</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 mb-3">Sign In</button>
+
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-danger mb-3">
+                @ViewBag.Message
+            </div>
+        }
+
+        <div class="text-center">
+            <p class="mb-0">Don't have an account? <a asp-action="Register" asp-controller="Auth" class="text-decoration-none fw-bold">Register</a></p>
+        </div>
+    </form>
+</div>
+
+<div class="auth-footer">
+    <p class="mb-0 small text-muted">© 2025 PathWay - Find Your Career Direction</p>
+</div>

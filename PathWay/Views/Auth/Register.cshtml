@@ -1,0 +1,95 @@
+﻿@{
+    Layout = "_AuthLayout";
+    ViewData["Title"] = "Register - PathWay";
+}
+
+<div class="auth-header">
+    <div class="brand-logo">
+        <i class="fas fa-road"></i>
+    </div>
+    <h3 class="mb-1">Join PathWay</h3>
+    <p class="mb-0">Create an account to start your career journey</p>
+</div>
+
+<div class="auth-body">
+    <form method="POST" asp-action="RegisterUser" asp-controller="Auth">
+        <div class="mb-4">
+            <label for="name" class="form-label">Username</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                <input type="text" class="form-control" id="name" name="Name" placeholder="Choose a username" required>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <label for="email" class="form-label">Email</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                <input type="email" class="form-control" id="email" name="Email" placeholder="Enter your email address" required>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                <input type="password" class="form-control" id="password" name="Password" placeholder="Create a password" required>
+            </div>
+            <div class="password-strength bg-secondary w-100 mt-2"></div>
+            <small class="text-muted">Use 8+ characters with a mix of letters, numbers & symbols</small>
+        </div>
+
+        <div class="mb-4">
+            <label for="password2" class="form-label">Confirm Password</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-check-circle"></i></span>
+                <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm your password" required>
+            </div>
+        </div>
+
+        <div class="mb-4 form-check">
+            <input type="checkbox" class="form-check-input" id="termsCheck" required>
+            <label class="form-check-label" for="termsCheck">
+                I agree to the <a href="#" class="text-decoration-none">Terms of Service</a> and <a href="#" class="text-decoration-none">Privacy Policy</a>
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 mb-3">Create Account</button>
+
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-danger mb-3">
+                @ViewBag.Message
+            </div>
+        }
+
+        <div class="text-center">
+            <p class="mb-0">Already have an account? <a asp-action="Login" asp-controller="Auth" class="text-decoration-none fw-bold">Login</a></p>
+        </div>
+    </form>
+</div>
+
+<div class="auth-footer">
+    <p class="mb-0 small text-muted">© 2025 PathWay - Find Your Career Direction</p>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            const strengthBar = document.querySelector('.password-strength');
+            let strength = 0;
+
+            if (password.length >= 8) strength++;
+            if (password.match(/[A-Z]/)) strength++;
+            if (password.match(/[0-9]/)) strength++;
+            if (password.match(/[^A-Za-z0-9]/)) strength++;
+
+            const colors = ['bg-danger', 'bg-warning', 'bg-info', 'bg-success'];
+            const widths = ['25%', '50%', '75%', '100%'];
+
+            strengthBar.className = `password-strength ${colors[Math.min(strength, 3)]}`;
+            strengthBar.style.width = widths[Math.min(strength, 3)];
+        });
+    </script>
+}
