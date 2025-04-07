@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Education Paths";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-graduation-cap me-2"></i>Education Paths</h1>
+</div>
+
+<div class="row">
+    @foreach (var path in Model) // Assume model contains education paths
+    {
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">@path.Title</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">@path.Description</p>
+                    <div class="badge bg-primary">@path.Duration Months</div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-info">Explore Path</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

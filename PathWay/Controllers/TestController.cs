@@ -4,7 +4,11 @@ namespace PathWay.Controllers
 {
     public class TestController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Results()
+        {
+            return View();
+        }
+        public IActionResult CareerTests()
         {
             return View();
         }

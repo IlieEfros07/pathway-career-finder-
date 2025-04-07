@@ -36,7 +36,7 @@
             <div class="sidebar-heading">Career Tools</div>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a asp-controller="Test" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Test" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+                    <a asp-controller="Test" asp-action="CareerTests" class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Test" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
                         <i class="fas fa-clipboard-list"></i>
                         <span>Career Tests</span>
                     </a>
@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a asp-controller="Education" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Education" ? "active" : "")">
+                    <a asp-controller="Career" asp-action="Education Paths" class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Education" ? "active" : "")">
                         <i class="fas fa-graduation-cap"></i>
                         <span>Education Paths</span>
                     </a>

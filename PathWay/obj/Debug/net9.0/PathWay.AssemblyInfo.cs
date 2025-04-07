@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PathWay")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d46008fa1e737efa0cdfb980889ddc2011f1d57")]
 [assembly: System.Reflection.AssemblyProductAttribute("PathWay")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PathWay")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

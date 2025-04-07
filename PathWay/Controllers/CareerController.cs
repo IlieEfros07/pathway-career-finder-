@@ -4,7 +4,7 @@ namespace PathWay.Controllers
 {
     public class CareerController : Controller
     {
-        public IActionResult Index()
+        public IActionResult EducationPaths()
         {
             return View();
         }

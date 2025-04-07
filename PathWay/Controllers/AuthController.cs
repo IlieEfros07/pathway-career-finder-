@@ -72,7 +72,8 @@ namespace PathWay.Controllers
                 Name = name,
                 Email = email,
                 Password = passwordHashed,
-                Created_At = DateTime.Now
+                Created_At = DateTime.Now,
+                MembershipType="Free"
             };
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
@@ -105,7 +106,7 @@ namespace PathWay.Controllers
             HttpContext.Session.SetString("_authenticated", "true");
             _authenticated = true;
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Dashboard");
         }
 
         [HttpPost]
